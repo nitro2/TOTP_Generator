@@ -15,7 +15,12 @@ type Author struct {
 }
 
 func GoogleAuthenticatorCode(author Author) (string, error) {
-	// fmt.Println("GoogleAuthenticatorCode")
+	// fmt.Println("GoogleAuthenticatorCode ")
+
+	// Padding "="
+	if n := len(author.Secret); n%8 != 0 {
+		author.Secret += strings.Repeat("=", 8-(n%8))
+	}
 
 	// Decode the secret from base32 to original
 	decodedKey, err := base32.StdEncoding.DecodeString(strings.ToUpper(author.Secret))
@@ -24,10 +29,12 @@ func GoogleAuthenticatorCode(author Author) (string, error) {
 		return "", err
 	}
 	// fmt.Println(decodedKey)
+
 	// hashed message is 8 bytes of (epoch/30)
 	rawMes := make([]byte, 8)
 	binary.BigEndian.PutUint64(rawMes, uint64(author.Epoch/30))
 	// fmt.Printf("rawMes=%v \n", rawMes)
+
 	//Signing the value using HMAC-SHA1 Algorithm
 	hash := hmac.New(sha1.New, decodedKey)
 	hash.Write(rawMes)
