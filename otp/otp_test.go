@@ -13,14 +13,14 @@ func TestGoogleAuthenticatorCode(t *testing.T) {
 	}{
 		{
 			"Golden test",
-			Author{"some data with \x00 and \ufeff", 1},
-			"ONXW2ZJAMRQXIYJAO5UXI2BAAAQGC3TEEDX3XPY=",
+			Author{"dummySECRETdummy", 1523822557}, //Secret=dummySECRETdummy
+			"563916",
 		},
 	}
 
 	for _, test := range test_cases {
 		t.Run(test.Name, func(t *testing.T) {
-			got := GoogleAuthenticatorCode(test.Input)
+			got, _ := GoogleAuthenticatorCode(test.Input)
 
 			if !reflect.DeepEqual(got, test.ExpectedCalls) {
 				t.Errorf("Not deep equal, got %v expected %v", got, test.ExpectedCalls)
