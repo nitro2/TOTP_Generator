@@ -11,11 +11,11 @@ import (
 
 type Author struct {
 	Secret string
-	Epoch  int
+	Epoch  int64
 }
 
 func GoogleAuthenticatorCode(author Author) (string, error) {
-	fmt.Println("GoogleAuthenticatorCode")
+	// fmt.Println("GoogleAuthenticatorCode")
 
 	// Decode the secret from base32 to original
 	decodedKey, err := base32.StdEncoding.DecodeString(strings.ToUpper(author.Secret))
