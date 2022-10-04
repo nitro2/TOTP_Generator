@@ -17,7 +17,7 @@ type Author struct {
 func GoogleAuthenticatorCode(author Author) (string, error) {
 	// fmt.Println("GoogleAuthenticatorCode ")
 
-	// Padding "="
+	// Padding "=" into base32 string
 	if n := len(author.Secret); n%8 != 0 {
 		author.Secret += strings.Repeat("=", 8-(n%8))
 	}
