@@ -14,5 +14,14 @@ Example output:
 232470
 ```
 
+## Best practice
+### MacOS
+Store your secrect into system:
+```
+security add-generic-password -a username -s yoursecret -w      
+```
 
-
+Retrieve the pass and pipe to OTP:
+```
+security find-generic-password -s yoursecret -w | xargs genotp
+```
