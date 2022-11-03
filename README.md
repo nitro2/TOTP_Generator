@@ -16,7 +16,7 @@ Example output:
 
 ## Best practice
 ### MacOS
-Store your secrect into system:
+Store your YOUR SECRET KEY into system:
 ```
 security add-generic-password -a username -s yoursecret -w      
 ```
